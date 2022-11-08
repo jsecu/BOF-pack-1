@@ -2,7 +2,7 @@ alias PrivChanger {
 	local('$handle $data $args $2,$3,$4');
 
     if(size(@_) != 4){
-        berror($1, "PrivChanger: not enough arguments,Usage: PrivChanger [enable/disable] [exe to run] [pid] ");
+        berror($1, "PrivChanger: not enough arguments,Usage: PrivChanger [enable/disable] [privilege to change Ex:SeDebugPrivilege] [pid] ");
         return;
     }
 
